@@ -1,10 +1,19 @@
 {
     "name": "my_test",
     "version": "1.0.0",
-    "keywords": ["util", "functional", "server", "client", "browser"],
+    "keywords": [
+        "util",
+        "functional",
+        "server",
+        "client",
+        "browser"
+    ],
     "author": "jacob",
     "contributors": [],
-    "dependencies": {}, "scripts":{
-"start":"node my_test.js"}
-
+    "dependencies": {
+        "mysql": "^2.18.1"
+    },
+    "scripts": {
+        "start": "node my_test.js"
+    }
 }

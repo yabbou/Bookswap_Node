@@ -36,7 +36,7 @@ http.createServer(function (req, res) {
         res.write("<h3>Message sent!</h3>");
     }
 
-}).listen(8080);
+}).listen(4000);
 
 function sendEmail(name, email, message) {
     var nodemailer = require('nodemailer');
