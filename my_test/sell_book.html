@@ -8,9 +8,9 @@
 
     <div class="inner-body">
         <h3>Sell Book</h3>
-        <form id="book-form" action="sell" method="post">
+        <form id="book-form" action="sell" method="get">
 
-            <input list="books" type="text" name="title" placeholder="Title"  required>
+            <input list="books" type="text" name="title" placeholder="Title" required>
             <!-- pattern="[a-zA-Z0-9 ]" -->
             <datalist id="books">
                 <option value="best fake book">
@@ -22,9 +22,8 @@
             </datalist>
             <!-- <span class="error"><?php echo $titleErr; ?></span> -->
 
-            <input type="text" name="cat" placeholder="Category" minlength="4" maxlength="4"
-                required>
-                <!-- pattern="[a-zA-Z ] -->
+            <input type="text" name="cat" placeholder="Category" minlength="4" maxlength="4" required>
+            <!-- pattern="[a-zA-Z ] -->
 
             <!-- should really also check if not taken by other book -->
             <input type="number" name="isbn" placeholder="ISBN-10" min="1000000000" max="9999999999" required>
@@ -41,7 +40,7 @@
             </datalist>
             <!-- <span class="error"><?php echo $profErr; ?></span> -->
 
-            <input class="btn-add-book" type="submit" value="Add Book!">
+            <input class="btn-add-book" type="submit" onclick="my_database.js" value="Add Book!">
         </form>
 
     </div>

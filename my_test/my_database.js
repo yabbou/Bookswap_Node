@@ -33,9 +33,9 @@ http.createServer(function (req, res) {
             res.write("<br>ISBN-10= " + query.isbn);
             res.write("<br>Professor= " + query.prof);
 
-            if (query.pass === query.pass_conf && query.email === query.email_conf) { //??
-                var sqlInsert = "INSERT INTO book (Title, Category, ISBN-10, Professor) VALUES ?";
-                var VALUES = [query.title, query.cat, query.isbn, query.prof];
+            if (query.pass === query.pass_conf && query.email === query.email_conf) {
+                var sqlInsert = "INSERT INTO book (Title, Category, `ISBN_10`,`ISBN-13`, Professor) VALUES (?)";
+                var VALUES = [query.title, query.cat, query.isbn, 0000000000000, query.prof];
 
                 con.query(sqlInsert, [VALUES], function (err, result) {
                     if (err) throw err;
@@ -47,23 +47,26 @@ http.createServer(function (req, res) {
         };
     });
 
-    // var sql = "SELECT * FROM book";
-    // con.query(sql, function (err, result) {
-    //     if (err) throw err;
-    //     console.log("Database Shown");
+    var sql = "SELECT * FROM book";
+    con.query(sql, function (err, result) {
+        if (err) throw err;
+        console.log("Database Shown");
 
-    //     if (result) {
-    //         console.log(result);
-    //         for (var book of result) {
-    //             console.log(book);
+        if (result) {
+            res.write("<table border=1><tr><th>Title</th><th>Major</th><th>ISBN-10</th><th>Prof</th></tr >");
+            for (var book of result) {
+                res.write(
+                    "<tr>" +
+                    "<td>" + book.Title + "</td>" +
+                    "<td>" + book.Category + "</td>" +
+                    "<td>" + book.ISBN_10 + "</td>" +
+                    "<td>" + book.Professor + "</td>"+
+                    "</tr>"
+                );
+            }
+            res.write("</table>");
 
-    //             book.forEach(element => {
-    //                 res.write(element);
-    //             });
-    //         }
-    //     }
-    // }
-   
-    
+        }
+    });
 
 }).listen(3000);
