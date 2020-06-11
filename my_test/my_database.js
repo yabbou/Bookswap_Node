@@ -18,7 +18,7 @@ http.createServer(function (req, res) {
     var q = url.parse(req.url, true);
     res.writeHead(200, { 'Content-type': 'text/html' });
 
-    fs.readFile("./sell_book.html", function (err, data) {
+    fs.readFile("./views/sell_book.html", function (err, data) {
         if (err) {
             res.writeHead(200, { 'Content-Type': 'text/html' });
             return res.end("404 Not Found");

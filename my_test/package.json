@@ -1,19 +1,29 @@
 {
-    "name": "my_test",
-    "version": "1.0.0",
-    "keywords": [
-        "util",
-        "functional",
-        "server",
-        "client",
-        "browser"
-    ],
-    "author": "jacob",
-    "contributors": [],
-    "dependencies": {
-        "mysql": "^2.18.1"
-    },
-    "scripts": {
-        "start": "node my_test.js"
-    }
+  "name": "my_test",
+  "version": "1.0.0",
+  "keywords": [
+    "util",
+    "functional",
+    "server",
+    "client",
+    "browser"
+  ],
+  "author": "jacob",
+  "contributors": [],
+  "dependencies": {
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "pug": "^3.0.0"
+  },
+  "scripts": {
+    "start": "node my_test.js"
+  },
+  "description": "Node bookswap",
+  "main": "my_test.js",
+  "devDependencies": {},
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/yabbou/Bookswap_Node.git"
+  }
 }

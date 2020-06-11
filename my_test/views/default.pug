@@ -1,0 +1,31 @@
+doctype html
+html
+
+  head
+    title #{title}
+    link(rel='stylesheet', href='/css/styles.css')
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+
+  body
+    main
+    div.flex_container
+      block header
+          header.page_title
+//            img(src='/pictures/tnc_logo.png').logo
+            |  #{title}
+          ul.navbar
+            li
+              a(href=`/home`).
+                Home
+            li
+              a(href=`/sell`).
+                Sell Book
+            li
+              a(href = `/contact`).
+                Contact
+            li
+              a(href= `/account`).
+                My Account
+
+      block content
+      
