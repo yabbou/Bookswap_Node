@@ -1,0 +1,65 @@
+/* browse form */
+
+.b-form-container {
+    height: 80%;
+    width: 100%;
+    background-image: url('../img/book-and-grass.webp');
+    background-size: cover;
+}
+
+.parallax {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.browse-text input {
+    width: 90%;
+    height: 45px;
+    background-color: #f2f2f262;
+}
+
+.browse-link {
+    margin-right: 10px;
+    display: inline;
+    font-size: large;
+}
+
+.browse-link a {
+    text-decoration: none;
+}
+
+/* carousel */
+
+.carousel-and-title {
+    margin-top: -200px;
+    height: -webkit-fill-available;
+}
+
+.jcarousel {
+    padding: 18px 21%;
+}
+
+.featured {
+    text-align: center;
+    margin-top: 0;
+}
+
+.slick-slide {
+    height: 25%!important;
+}
+
+.slick-slide img {
+    height: 180px;
+    border-radius: 1px;
+    border: solid #ccc 1.5px;
+    margin: 18px 0 18px 17px;
+}
+
+.slick-list {
+    background-color: #f2f2f282;
+    border-radius: 5px;
+    height: 27.5%;
+    z-index: 2;
+}

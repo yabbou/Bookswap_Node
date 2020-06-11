@@ -1,31 +1,31 @@
 doctype html
 html
-
   head
     title #{title}
-    link(rel='stylesheet', href='/css/styles.css')
+    link(rel='stylesheet' href='/css/styles.css')
+    link(rel='stylesheet' href='/css/navbar.css')
+    link(rel='stylesheet' href='/css/browse.css')
+    link(rel='stylesheet' href='/css/books.css')
     meta(name="viewport" content="width=device-width, initial-scale=1")
 
   body
     main
     div.flex_container
       block header
-          header.page_title
-//            img(src='/pictures/tnc_logo.png').logo
-            |  #{title}
-          ul.navbar
-            li
-              a(href=`/home`).
-                Home
-            li
-              a(href=`/sell`).
-                Sell Book
-            li
-              a(href = `/contact`).
-                Contact
-            li
-              a(href= `/account`).
-                My Account
-
+        header.page_title
+          img(src=`/img/book-rows.webp`).logo
+          #{title}
+        ul.navbar
+          li
+            a(class=`nav-link` href=`/home`). 
+              Home
+          li
+            a(class=`nav-link` href=`/sell`).
+              Sell Book
+          li
+            a(class=`nav-link` href = `/contact`).
+              Contact
+          li
+            a(class=`nav-link` href= `/account`).
+              My Account
       block content
-      

@@ -1,0 +1,73 @@
+/* books */
+
+.book-tile {
+    background-color: rgba(79, 181, 245, 0.4);
+    margin: 15px 10px 20px 36px;
+    width: 200px;
+    border-radius: 2px;
+    padding: 13px 10px 15px 12px;
+    /* top right, bottom, left */
+    list-style: none;
+    box-shadow: 2px 2px 5px #888888d8;
+    height: 300px;
+    display: inline-table;
+}
+
+.book-tile a {
+    color: #666666;
+}
+
+.book-tile p {
+    margin: 10px auto;
+}
+
+.book-tile-img {
+    width: 170px;
+    border: none;
+    margin-left: 16px;
+    /* padding-bottom: 7px; */
+}
+
+.book-tiles-container {
+    padding: 28px;
+}
+
+.book-tiles {
+    margin: 20px;
+    list-style: none;
+    padding: 0 15px;
+}
+
+.book-subgroup {
+    margin-bottom: 20px;
+}
+
+.book-information {
+    display: flex;
+    margin: 30px;
+    height: fit-content;
+}
+.book-dets{
+    margin-left: 20px;
+}
+
+/* sidebar */
+
+.sidebar {
+    background-color: rgba(79, 181, 245, 0.4);
+    padding: 25px;
+    min-width: 184px;
+    box-shadow: 1px 1px 3px #888888;
+}
+
+.browse-text-sidebar input {
+    width: 100%;
+    background-color: #f2f2f262;
+}
+
+.sidebar-and-content {
+    display: flex;
+    /* margin-top: 6%; */
+    min-height: 81%;
+    padding-top: 60px;
+}

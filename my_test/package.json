@@ -16,10 +16,10 @@
     "pug": "^3.0.0"
   },
   "scripts": {
-    "start": "node my_test.js"
+    "start": "nodemon server.js --watch"
   },
   "description": "Node bookswap",
-  "main": "my_test.js",
+  "main": "server.js",
   "devDependencies": {},
   "license": "ISC",
   "repository": {
