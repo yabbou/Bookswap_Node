@@ -12,20 +12,24 @@ html
     main
     div.flex_container
       block header
-        header.page_title
-          img(src=`/img/book-rows.webp`).logo
-          #{title}
-        ul.navbar
-          li
-            a(class=`nav-link` href=`/home`). 
-              Home
-          li
-            a(class=`nav-link` href=`/sell`).
-              Sell Book
-          li
-            a(class=`nav-link` href = `/contact`).
-              Contact
-          li
-            a(class=`nav-link` href= `/account`).
-              My Account
+        header
+        div.navbar
+          div.logo-and-title
+            div.img-cropper
+              img(src=`/img/book-rows.webp`).logo
+            #{title}
+
+          ul.navbar-group
+            li.nav-item
+              a(class=`nav-link` href=`/home`).
+                Home
+            li
+              a(class=`nav-link` href=`/sell`).
+                Sell Book
+            li
+              a(class=`nav-link` href = `/contact`).
+                Contact
+            li
+              a(class=`nav-link` href= `/account`).
+                My Account
       block content
