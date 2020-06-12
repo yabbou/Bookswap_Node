@@ -53,6 +53,8 @@ app.get(['/account'], (req, res) => {
     res.render('account', { title: 'My Account' });
 });
 
+// todo: impl...
+
 app.use(function (req, res, next) {
     res.status(404).send("Sorry can't find that!")
 })
@@ -86,7 +88,7 @@ function sendConfimationEmail(email) {
     });
 }
 
-function getBooks(classes, res) {
+function getBooks(books, res) {
     var con = mysql.createConnection({
         host: "localhost",
         username: "root",
@@ -99,7 +101,7 @@ function getBooks(classes, res) {
         var books = [];
         if (err) throw err;
         else {
-            console.log("connected!");
+            console.log("Connected!");
         }
         var sql = "select * from book";
         con.query(sql, function (err, result, fields) {
@@ -108,22 +110,21 @@ function getBooks(classes, res) {
                 throw err;
             }
             for (var i = 0; i < result.length; i++) {
-                var Class = {
-                    'name': result[i].CLASS_NAME,
-                    'start': result[i].CLASS_START,
-                    'day': result[i].CLASS_DAY,
-                    'begin': result[i].CLASS_TIME_BEGIN,
-                    'end': result[i].CLASS_TIME_END
+                var Book = {
+                    'title': result[i].TITLE,
+                    'isbn': result[i].ISBN,
+                    'prof': result[i].PROF,
+                    'cat': result[i].CAT
                 }
-                books.push(Class);
+                books.push(Book);
             }
             for (var i = 0; i < books.length; i++) {
                 console.log(books[i]);
             }
-            console.log("done looping");
-            //return classes;
-            res.render('classes', {
-                title: 'Class listing',
+            console.log("Done...");
+
+            res.render('/books', {
+                title: 'Books',
                 list: books
             });
         });

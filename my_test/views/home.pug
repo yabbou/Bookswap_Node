@@ -7,13 +7,9 @@ block content
         div.b-form-container.parallax
         form#b-form(action='/show_books' method='GET')
         div.browse-text
-            input(
-                type='text'
-                name='browse' 
-                placeholder='Browse our titles'
-                required
-            )
+            input(type='text' name='browse' placeholder='Browse our titles' required)
         div.browse-link 
+            //-use get 
             a(class='browse-link' href='') By Major
             a(class='browse-link' href='') By Prof
-            a(class='browse-link' href='') All Books
+            a(class='browse-link' href='/books') All Books

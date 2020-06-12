@@ -2,12 +2,12 @@ extends default
 
 block content
       div.inner-body  
-            h4 We'd love to hear from you!
-            form(method='POST', action='/contact_action').contact-form
-                  div.form-group
-                        label(for='name') Name
-                        input(type="text" placeholder="Enter Name Here" name="nameEntry" required)
+            h4 Login
+            form(method='POST', action='/login')
                   div.form-group
                         label(for='email') Email
-                        input(type="text" placeholder="Enter Email Here" name="emailEntry" required)
-                  input(type='submit', value='Send')
+                        input(type=type="email" name="email" id="email" placeholder="Enter email here" required)
+                  div.form-group
+                        label(for='pwd') Password
+                        input(type="password" name="pwd" id="pwd" placeholder="Enter password here" required)
+                  input(type='submit', value='Login')
