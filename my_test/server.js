@@ -11,23 +11,56 @@ app.listen(port, () => {
     console.log(`Express running -> PORT 3000`);
 });
 
+// homepage and book listings
 app.get(['/', '/home'], (req, res) => {
     res.render('home', { title: 'Home' });
 });
 
+app.get('/books', (req, res) => {
+    try {
+        var allBooks = [];
+        getBooks(allBooks, res);
+    }
+    catch (error) {
+        console.log('Error with database!');
+    }
+});
+
+// add
 app.get(['/sell'], (req, res) => {
-    res.render('sell_book.html');
+    res.render('sell.pug', { title: 'Sell Book' });
+});
+
+app.post('/sell_action', (req, res) => { addBook(req, res); });
+
+// misc
+app.get(['/contact'], (req, res) => {
+    res.render('contact', { title: 'Contact Us' });
+});
+
+app.post('/contact_action', (req, res) => {
+    sendConfimationEmail(req.body.email);
+    console.log(req.name);
+    res.render('contact_confirmation', {
+        title: 'Confirmation',
+        name: req.body.name,
+        number: req.body.phoneNumber
+
+    });
+});
+
+app.get(['/account'], (req, res) => {
+    res.render('account', { title: 'My Account' });
 });
 
 app.use(function (req, res, next) {
     res.status(404).send("Sorry can't find that!")
 })
 
-/**
- * Method to send them a confirmation email.
- * @param {} email 
- */
-function sendEmail(email) {
+// todo: implement thsee
+
+// heavy-lifters 
+function sendConfimationEmail(email) {
     var transport = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -53,27 +86,24 @@ function sendEmail(email) {
     });
 }
 
-// todo: implement thsee
-
 function getBooks(classes, res) {
     var con = mysql.createConnection({
         host: "localhost",
         username: "root",
-        password: "YOURSQLPASSWORD",
-        database: "newcollege",
+        password: "",
+        database: "bookswap",
 
     });
 
     con.connect(function (err) {
-        //var classes = [];
+        var books = [];
         if (err) throw err;
         else {
             console.log("connected!");
         }
-        var sql = "select * from class";
+        var sql = "select * from book";
         con.query(sql, function (err, result, fields) {
             if (err) {
-                console.log("error here");
                 console.log("err");
                 throw err;
             }
@@ -85,16 +115,16 @@ function getBooks(classes, res) {
                     'begin': result[i].CLASS_TIME_BEGIN,
                     'end': result[i].CLASS_TIME_END
                 }
-                classes.push(Class);
+                books.push(Class);
             }
-            for (var i = 0; i < classes.length; i++) {
-                console.log(classes[i]);
+            for (var i = 0; i < books.length; i++) {
+                console.log(books[i]);
             }
             console.log("done looping");
             //return classes;
             res.render('classes', {
                 title: 'Class listing',
-                list: classes
+                list: books
             });
         });
 
