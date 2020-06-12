@@ -49,13 +49,13 @@ ul.navbar a:hover {
 
 .navbar li {
     list-style: none;
+    margin: 0 8px;
 }
 
 .navbar-group {
     list-style: none;
     display: flex;
-    /* width: 30%; */
-    justify-content: space-evenly;
+margin-right: 20px;    justify-content: space-evenly;
 }
 
 .nav-link {

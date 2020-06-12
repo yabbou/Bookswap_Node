@@ -15,7 +15,6 @@ body {
 
 .inner-body {
     padding: 20px 40px;
-    margin-top: 6%;
     min-height: 76.2%;
 }
 
@@ -61,28 +60,20 @@ textarea {
 
 button, input[type=submit] {
     background-color: #70C3F6;
-    color: whitesmoke;
+    color: white;
     font-size: 14px;
     opacity: 0.75;
     border: 0;
     border-radius: 85px;
-    height: 2.2rem;
+    height: 30px;
+    padding: 0 10px;
+    margin-top: 5px;
 }
 
-button.send {
-    margin-top: 10px;
-    width: 4.5rem;
+input[type=submit]:hover{
+    opacity: 1;
 }
 
-.btn-add-book {
-    width: 6rem;
-    margin-top: 2px;
-}
-
-.btn-login {
-    width: 4rem;
-    margin-top: 0!important;
-}
 
 .slick-prev {
     left: 220px!important;
@@ -113,8 +104,8 @@ a {
     color: darkslateblue;
 }
 
-a:hover, a.nav-link:hover {
-    color: #53A7DB;
+a:hover, a.nav-link:hover, .browse-link a:hover {
+    color: #3aa3e4;
 }
 
 /* nav links */

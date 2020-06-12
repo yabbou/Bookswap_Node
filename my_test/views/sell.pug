@@ -1,0 +1,15 @@
+extends default
+block content
+
+    form(method="POST" action="/sell_action").inner-body
+        h4 What title would you like to sell?
+        //- todo: include patterns
+        div.form-group
+            input(list="books" type="text" name="title" placeholder="Title" required)
+        div.form-group
+            input(type="number" name="isbn" placeholder="ISBN-10" min="1000000000" max="9999999999" required)
+        div.form-group
+            input(list="cats" type="text" name="cat" placeholder="Category" minlength="4" maxlength="4" required)
+        div.form-group
+            input(list="profs" type="text" name="prof" placeholder="Professor" required)
+        input(class="btn-add-book" type='submit' value='Submit')

@@ -1,0 +1,28 @@
+extends default
+block content
+
+  .page_content
+    -var classes = [];
+    -classes = list;
+    -var numbers = [1, 2, 3];
+    table.class_list
+      tr
+        th Class
+        th Day
+        th Begin date
+        th Starts at
+        th Ends at  
+      each c in classes
+        tr
+          td=c.name
+          td=c.day
+          td=(c.start.getMonth() + 1) + "/" + c.start.getDate() +"/" + (c.start.getYear() + 1900)
+          td=c.begin
+          td=c.end
+
+
+ 
+    
+    
+
+        
