@@ -4,10 +4,14 @@ block content
       div.inner-body  
             h4 We'd love to hear from you!
             form(method='POST', action='/contact_action').contact-form
-                  div.form-group
-                        label(for='name') Name
+                  div
+                        label(for='nameEntry') Name
                         input(type="text" placeholder="Enter Name Here" name="nameEntry" required)
-                  div.form-group
-                        label(for='email') Email
+                  div
+                        label(for='emailEntry') Email
                         input(type="text" placeholder="Enter Email Here" name="emailEntry" required)
+                  div
+                        label(for='msgEntry') Comments
+                        textarea(placeholder="Enter Comments Here" name="msgEntry" required)
+
                   input(type='submit', value='Send')

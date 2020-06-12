@@ -36,7 +36,7 @@ footer p4, footer a {
 
 /* buttons and inputs */
 
-input[type=text], input[type=number], input[type=email], input[type=password] {
+input[type=text], input[type=number], input[type=email], input[type=password], textarea {
     width: 45%;
     padding: 15px 20px;
     margin: 8px 0;
@@ -47,15 +47,10 @@ input[type=text], input[type=number], input[type=email], input[type=password] {
 }
 
 textarea {
-    height: 30%;
-    min-height: 10%;
-    max-height: 80%;
-    min-width: 80%;
-    max-width: 80%;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-right: 100%;
-    padding: 15px 20px;
+    min-width: 45%;
+    max-width: 45%;
+    /* min-height: 36px; */
+    height: 140px;
 }
 
 button, input[type=submit] {
