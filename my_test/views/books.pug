@@ -2,6 +2,21 @@ extends default
 
 block content
 
+  div
+    -var books = list;
+    -var numbers = [1, 2, 3];
+    table(border=1)
+      tr
+        th Title
+        th ISBN-10
+        th Professor
+        th Major
+      each b in books
+        tr
+          td=b.title
+          td=b.isbn
+          td=b.prof
+          td=b.cat
 
  
 //- echo "<div class='sidebar-and-content'>";

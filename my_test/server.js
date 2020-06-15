@@ -12,7 +12,6 @@ const server = app.listen(port, () => { console.log(`Express running -> PORT ${s
 app.set('view engine', 'pug');
 app.use(express.static(__dirname + '/public'));
 
-
 // homepage and book listings
 app.get(['/', '/home'], (req, res) => {
     res.render('home', { title: 'Home' });
@@ -60,15 +59,9 @@ app.use(function (req, res, next) {
     res.status(404).send("Sorry can't find that!")
 })
 
-var con = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "bookswap"
-
-});
-
 function getBooks(books, res) {
+    var con = initConnection();
+
     con.connect(function (err) {
         if (err) throw err;
         else {
@@ -84,53 +77,24 @@ function getBooks(books, res) {
 
             for (var i = 0; i < result.length; i++) {
                 var Book = {
-                    'title': result[i].Title, //yes?
+                    'title': result[i].Title,
                     'isbn': result[i].ISBN_10,
                     'prof': result[i].Professor,
                     'cat': result[i].Category
                 }
                 books.push(Book);
+                console.log(Book);
             }
-            for (var i = 0; i < books.length; i++) {
-                console.log(books[i]);
-            }
-            console.log("Last book.\n");
+            console.log("Done books...\n");
 
-            res.render('/books', { title: 'Books', list: books });
+            res.render('books', { title: 'Books', list: books });
         });
     });
 
 }
 
-function displayBooks(res) {
-    var sql = "SELECT * FROM book";
-    con.query(sql, function (err, result) {
-        if (err)
-            throw err;
-        console.log("Database Shown");
-
-        if (result) {
-            res.write("<table border=1><tr><th>Title</th><th>Major</th><th>ISBN-10</th><th>Prof</th></tr >");
-            for (var book of result) {
-                res.write("<tr>" +
-                    "<td>" + book.Title + "</td>" +
-                    "<td>" + book.Category + "</td>" +
-                    "<td>" + book.ISBN_10 + "</td>" +
-                    "<td>" + book.Professor + "</td>" +
-                    "</tr>");
-            }
-            res.write("</table>");
-        }
-    });
-}
-
 function addBook(req, res) {
-    // var con = mysql.createConnection({
-    //     host: "localhost",
-    //     username: "root",
-    //     password: "",
-    //     database: "bookswap"
-    // });
+    var con = initConnection();
 
     con.connect(function (err) {
         if (err) throw err;
@@ -139,14 +103,30 @@ function addBook(req, res) {
         }
 
         var query = req.body;
-        var sqlInsert = "INSERT INTO book (Title, Category, `ISBN_10`,`ISBN-13`, Professor) VALUES (?)";
-        var VALUES = [query.title, query.cat, query.isbn, 0000000000000, query.prof]; //yes?
+        var sqlInsert = "INSERT INTO book (Title, Category, `ISBN_10`,`ISBN_13`, Professor, Image) VALUES (?)";
+        var VALUES = [query.title, query.cat, query.isbn, 0000000000000, query.prof, '/public/img/no-image.png']; //yes?
 
-        console.log("sql: " + insertSql);
-        con.query(sql, [VALUES], function (error, results, fields) {
+        console.log("sql: " + sqlInsert + VALUES);
+        con.query(sqlInsert, [VALUES], function (error) {
             if (error) throw error;
+
             console.log("Added to the Database.");
-            res.redirect('/books');
+            // res.redirect('/books'); //later...
         });
+
+        //also into booksAvailable () VALUES (?) ...
+        //also into professor () VALUE ...
+        //also into major () VALUE ...
+
+    });
+}
+
+function initConnection() {
+    return mysql.createConnection({
+        host: "localhost",
+        user: "root",
+        password: "",
+        database: "bookswap"
+
     });
 }
