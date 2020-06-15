@@ -1,15 +1,17 @@
 var express = require('express');
 var app = express();
-var nodemailer = require('nodemailer');
 var mysql = require('mysql');
+var methods = require('./methods');
+
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }));
 
 const port = process.env.port || 3000;
+const server = app.listen(port, () => { console.log(`Express running -> PORT ${server.address().port}`); });
 
 app.set('view engine', 'pug');
 app.use(express.static(__dirname + '/public'));
-app.listen(port, () => {
-    console.log(`Express running -> PORT 3000`);
-});
+
 
 // homepage and book listings
 app.get(['/', '/home'], (req, res) => {
@@ -39,13 +41,14 @@ app.get(['/contact'], (req, res) => {
 });
 
 app.post('/contact_action', (req, res) => {
-    sendConfimationEmail(req.body.email);
-    console.log(req.name);
+    methods.sendEmail(req.body.nameEntry, req.body.emailEntry, req.body.msgEntry);
+    console.log(req.body);
+
     res.render('contact_confirmation', {
         title: 'Confirmation',
-        name: req.body.name,
-        number: req.body.phoneNumber
-
+        name: req.body.nameEntry,
+        email: req.body.emailEntry,
+        msg: req.body.msgEntry
     });
 });
 
@@ -53,105 +56,97 @@ app.get(['/account'], (req, res) => {
     res.render('account', { title: 'My Account' });
 });
 
-// todo: impl...
-
 app.use(function (req, res, next) {
     res.status(404).send("Sorry can't find that!")
 })
 
-// todo: implement thsee
+var con = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "",
+    database: "bookswap"
 
-// heavy-lifters 
-function sendConfimationEmail(email) {
-    var transport = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: 'YOURGMAILUSERNAME@gmail.com',
-            pass: 'YOURGMAILPASSWORD'
-        }
-    });
-
-    var mailOptions = {
-        from: 'YOURGMAILUSERNAME@gmail.com',
-        to: email,
-        subject: 'Phone call Confirmation',
-        html: 'Hi there! <br> This is a confirmation email for your requested phone call <br> One of our dedicated advisors will be calling you shortly.<br>Looking forward to speaking with you, <br>The New College'
-    };
-
-    transport.sendMail(mailOptions, function (error, info) {
-        if (error) {
-            console.log(error);
-        }
-        else {
-            console.log('Email sent: ' + info.response);
-        }
-    });
-}
+});
 
 function getBooks(books, res) {
-    var con = mysql.createConnection({
-        host: "localhost",
-        username: "root",
-        password: "",
-        database: "bookswap",
-
-    });
-
     con.connect(function (err) {
-        var books = [];
         if (err) throw err;
         else {
             console.log("Connected!");
         }
+
         var sql = "select * from book";
-        con.query(sql, function (err, result, fields) {
+        con.query(sql, function (err, result) {
             if (err) {
                 console.log("err");
                 throw err;
             }
+
             for (var i = 0; i < result.length; i++) {
                 var Book = {
-                    'title': result[i].TITLE,
-                    'isbn': result[i].ISBN,
-                    'prof': result[i].PROF,
-                    'cat': result[i].CAT
+                    'title': result[i].Title, //yes?
+                    'isbn': result[i].ISBN_10,
+                    'prof': result[i].Professor,
+                    'cat': result[i].Category
                 }
                 books.push(Book);
             }
             for (var i = 0; i < books.length; i++) {
                 console.log(books[i]);
             }
-            console.log("Done...");
+            console.log("Last book.\n");
 
-            res.render('/books', {
-                title: 'Books',
-                list: books
-            });
+            res.render('/books', { title: 'Books', list: books });
         });
-
     });
 
 }
 
-function addBook(req, res) {
-    var con = mysql.createConnection({
-        host: "localhost",
-        usernmae: "root",
-        password: "YOURSQLPASSWORD",
-        database: "newcollege"
+function displayBooks(res) {
+    var sql = "SELECT * FROM book";
+    con.query(sql, function (err, result) {
+        if (err)
+            throw err;
+        console.log("Database Shown");
+
+        if (result) {
+            res.write("<table border=1><tr><th>Title</th><th>Major</th><th>ISBN-10</th><th>Prof</th></tr >");
+            for (var book of result) {
+                res.write("<tr>" +
+                    "<td>" + book.Title + "</td>" +
+                    "<td>" + book.Category + "</td>" +
+                    "<td>" + book.ISBN_10 + "</td>" +
+                    "<td>" + book.Professor + "</td>" +
+                    "</tr>");
+            }
+            res.write("</table>");
+        }
     });
+}
+
+function addBook(req, res) {
+    // var con = mysql.createConnection({
+    //     host: "localhost",
+    //     username: "root",
+    //     password: "",
+    //     database: "bookswap"
+    // });
 
     con.connect(function (err) {
         if (err) throw err;
         else {
             console.log("Connected...")
         }
-        var sql = "INSERT INTO `class`( `CLASS_NAME`, `CLASS_START`, `CLASS_DAY`, `CLASS_TIME_BEGIN`," +
-            " `CLASS_TIME_END`) VALUES ('" + req.body.name + "','" + req.body.start_date + "','" + req.body.day + "','" + req.body.start_time + "','" + req.body.end_time + "')";
-        console.log("sql query: " + sql);
-        con.query(sql, function (error, results, fields) {
+
+        var query = req.body;
+        var sqlInsert = "INSERT INTO book (Title, Category, `ISBN_10`,`ISBN-13`, Professor) VALUES (?)";
+        var VALUES = [query.title, query.cat, query.isbn, 0000000000000, query.prof]; //yes?
+
+        console.log("sql: " + insertSql);
+        con.query(sql, [VALUES], function (error, results, fields) {
             if (error) throw error;
-            res.redirect('/classes');
+            console.log("Added to the Database.");
+            res.redirect('/books');
         });
     });
 }

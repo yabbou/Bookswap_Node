@@ -25,5 +25,9 @@
   "repository": {
     "type": "git",
     "url": "git://github.com/yabbou/Bookswap_Node.git"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/yabbou/Bookswap_Node/issues"
+  },
+  "homepage": "https://github.com/yabbou/Bookswap_Node#readme"
 }
