@@ -28,7 +28,7 @@ app.get('/books', (req, res) => {
 });
 
 // add
-app.get(['/sell'], (req, res) => {
+app.get('/sell', (req, res) => {
     res.render('sell.pug', { title: 'Sell Book' });
 });
 
@@ -127,6 +127,5 @@ function initConnection() {
         user: "root",
         password: "",
         database: "bookswap"
-
     });
 }
