@@ -35,7 +35,7 @@ app.get('/sell', (req, res) => {
 app.post('/sell_action', (req, res) => { addBook(req, res); });
 
 // misc
-app.get(['/contact'], (req, res) => {
+app.get('/contact', (req, res) => {
     res.render('contact', { title: 'Contact Us' });
 });
 
@@ -51,7 +51,7 @@ app.post('/contact_action', (req, res) => {
     });
 });
 
-app.get(['/account'], (req, res) => {
+app.get('/account', (req, res) => {
     res.render('account', { title: 'My Account' });
 });
 
