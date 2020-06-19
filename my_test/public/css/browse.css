@@ -3,7 +3,8 @@
 .b-form-container {
     height: 80%;
     width: 100%;
-    background-image: url('../img/book-and-grass.webp');
+    margin: auto 18%;
+    /* background-image: url('../img/book-and-grass.webp'); */
     background-size: cover;
 }
 
@@ -12,6 +13,9 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    background-image: url('../img/book-and-cup.jpg');
+    height: 495px;
+    opacity: 86%;
 }
 
 .browse-text input {

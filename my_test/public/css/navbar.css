@@ -52,7 +52,7 @@ img.logo {
 }
 
 ul.navbar a:hover {
-    color: #53A7DB;
+    color: #53a7db48;
 }
 
 .nav-title {
@@ -74,7 +74,8 @@ ul.navbar a:hover {
     font: medium;
     font-size: 19px;
     letter-spacing: .8px;
-    background: aliceblue;
+    /* background: aliceblue; */
+    background-color: #cbf3ff;
     border-bottom: .8px solid grey;
     align-items: center;
     margin-top: 0;

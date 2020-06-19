@@ -1,15 +1,14 @@
 extends default
 
 block content
-    div.page_content.inner-body  
-        h2 Welcome
-
-        div.b-form-container.parallax
-        form#b-form(action='/show_books' method='GET')
-        div.browse-text
-            input(type='text' name='browse' placeholder='Browse our titles' required)
-        div.browse-link 
-            //-use get 
-            a(class='browse-link' href='') By Major
-            a(class='browse-link' href='') By Prof
-            a(class='browse-link' href='/books') All Books
+    div.inner-body.parallax
+        div.b-form-container
+            h2 Welcome
+            form#b-form(action='/show_books' method='GET')
+            div.browse-text
+                input(type='text' name='browse' placeholder='Browse our titles' required)
+            div.browse-link 
+                //-use get 
+                a(class='browse-link' href='') By Major
+                a(class='browse-link' href='') By Prof
+                a(class='browse-link' href='/books') All Books
