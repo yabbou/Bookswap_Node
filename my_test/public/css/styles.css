@@ -78,23 +78,6 @@ input[type=submit]:hover{
     right: 220px!important;
 }
 
-/* img */
-
-.img-cropper {
-    width: 30px;
-    height: 30px;
-    position: relative;
-    overflow: hidden;
-    border-radius: 50%;
-    border: #807f7f solid 1px;
-}
-
-img.logo {
-    margin: 0;
-    margin-left: -25%;
-    height: 100%;
-}
-
 a {
     color: darkslateblue;
 }

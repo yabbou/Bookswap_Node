@@ -49,6 +49,7 @@ app.post('/contact_action', (req, res) => {
         email: req.body.emailEntry,
         msg: req.body.msgEntry
     });
+    // res.redirect('/contact'); //not here, and after few moments
 });
 
 app.get('/account', (req, res) => {
@@ -111,7 +112,7 @@ function addBook(req, res) {
             if (error) throw error;
 
             console.log("Added to the Database.");
-            // res.redirect('/books'); //later...
+            res.redirect('/books'); 
         });
 
         //also into booksAvailable () VALUES (?) ...

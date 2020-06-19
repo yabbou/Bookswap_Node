@@ -13,6 +13,10 @@
     display: inline-table;
 }
 
+th, td{
+padding: 7px 12px;
+}
+
 .book-tile a {
     color: #666666;
 }

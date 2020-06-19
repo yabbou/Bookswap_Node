@@ -11,11 +11,44 @@ header {
 .logo-and-title {
     display: flex;
     margin: 8px;
-    margin-left: 16px;
+    margin-left: 37px;
+    align-items: center;
 }
 
 .logo-and-title a {
+    color: black;
     text-decoration: none;
+}
+
+.logo-and-title a:hover {
+    color: black;
+}
+
+.logo-and-title h3 {
+    padding-left: 10px;
+    font-size: 26px;
+}
+
+/* img */
+
+.img-cropper {
+    width: 30px;
+    height: 30px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+    border: #807f7f solid 1px;
+    background-color: #f5f5f5;
+}
+
+img.logo {
+    margin: 0;
+    /* margin-left: -25%;
+    height: 100%; */
+    padding-top: 20%;
+    padding-left: 5%;
+    height: 60%;
+    background-image: url('../img/hand-to-hand.jpg');
 }
 
 ul.navbar a:hover {
@@ -36,7 +69,7 @@ ul.navbar a:hover {
     display: flex;
     justify-content: space-between;
     /* width: 100%; */
-    height: 60px;
+    height: 82px;
     text-transform: uppercase;
     font: medium;
     font-size: 19px;
@@ -55,7 +88,8 @@ ul.navbar a:hover {
 .navbar-group {
     list-style: none;
     display: flex;
-margin-right: 20px;    justify-content: space-evenly;
+    margin-right: 20px;
+    justify-content: space-evenly;
 }
 
 .nav-link {
