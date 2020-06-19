@@ -16,6 +16,9 @@
 th, td{
 padding: 7px 12px;
 }
+th{
+    background-color: aliceblue;
+}
 
 .book-tile a {
     color: #666666;

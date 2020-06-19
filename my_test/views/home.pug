@@ -4,9 +4,11 @@ block content
     div.inner-body.parallax
         div.b-form-container
             h2 Welcome
-            form#b-form(action='/show_books' method='GET')
-            div.browse-text
-                input(type='text' name='browse' placeholder='Browse our titles' required)
+            form#b-form(action='/browse_action' method='POST') 
+                //- lookup get
+                div.browse-text
+                    input(type='text' name='browse' placeholder='Browse our titles' required)
+                    //- input(type="submit")
             div.browse-link 
                 //-use get 
                 a(class='browse-link' href='') By Major

@@ -19,12 +19,38 @@ app.get(['/', '/home'], (req, res) => {
 
 app.get('/books', (req, res) => {
     try {
-        var allBooks = [];
-        getBooks(allBooks, res);
+        getBooks(res);
     }
     catch (error) {
         console.log('Error with database!');
     }
+});
+
+app.post('/browse_action', (req, res) => {
+    console.log(req.body);
+    var con = initConnection();
+
+    con.connect(function (err) {
+        if (err) throw err;
+        else {
+            console.log("Connected!");
+        }
+
+        var b = req.body.browse;
+        var sql = "select * from book where title like '%" + b + "%'";
+        console.log(sql);
+
+        con.query(sql, function (err, result) {
+            if (err) {
+                console.log("err");
+                throw err;
+            }
+
+            var books = getBooksLoop(result);
+            res.render('books', { specificTitle: b, list: books });
+        });
+    });
+
 });
 
 // add
@@ -58,9 +84,27 @@ app.get('/account', (req, res) => {
 
 app.use(function (req, res, next) {
     res.status(404).send("Sorry can't find that!")
+    res.redirect('/home'); //after seconds...
 })
 
-function getBooks(books, res) {
+function getBooksLoop(result) {
+    var updated = [];
+    for (var i = 0; i < result.length; i++) {
+        var Book = {
+            'title': result[i].Title,
+            'isbn': result[i].ISBN_10,
+            'prof': result[i].Professor,
+            'cat': result[i].Category
+        };
+        updated.push(Book);
+        console.log(Book);
+    }
+
+    console.log("Done books...\n");
+    return updated;
+}
+
+function getBooks(res) {
     var con = initConnection();
 
     con.connect(function (err) {
@@ -75,20 +119,8 @@ function getBooks(books, res) {
                 console.log("err");
                 throw err;
             }
-
-            for (var i = 0; i < result.length; i++) {
-                var Book = {
-                    'title': result[i].Title,
-                    'isbn': result[i].ISBN_10,
-                    'prof': result[i].Professor,
-                    'cat': result[i].Category
-                }
-                books.push(Book);
-                console.log(Book);
-            }
-            console.log("Done books...\n");
-
-            res.render('books', { title: 'Books', list: books });
+            var books = getBooksLoop(result);
+            res.render('books', { specificTitle: 'All Books', list: books });
         });
     });
 
@@ -112,7 +144,7 @@ function addBook(req, res) {
             if (error) throw error;
 
             console.log("Added to the Database.");
-            res.redirect('/books'); 
+            res.redirect('/books');
         });
 
         //also into booksAvailable () VALUES (?) ...
