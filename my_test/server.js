@@ -11,6 +11,8 @@ const server = app.listen(port, () => { console.log(`Express running -> PORT ${s
 
 app.set('view engine', 'pug');
 app.use(express.static(__dirname + '/public'));
+app.use('/favicon.ico', express.static('img/favicon.ico'));
+// app.use(express.favicon('./public/img/favicon.ico')); 
 
 // homepage and book listings
 app.get(['/', '/home'], (req, res) => {
